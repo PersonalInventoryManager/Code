@@ -15,7 +15,7 @@ class Item
   property :date_modified,  DateTime
   
   has n, :itemAttributes
-  has 1, :category
+  belongs_to :category, :required => false
   
   def add_attribute(key, value)
     if !@itemAttributes.nil? and @itemAtributes.get(:akey => key).nil?

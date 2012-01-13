@@ -9,7 +9,7 @@ class Category
   property :cname, String
   
   has n, :categoryAttributes
-  belongs_to :item
+  has n, :items
   
   def add_attribute(key)
     if !@categoryAttributes.nil? and @categoryAttributes.get(:akey => key).nil?
