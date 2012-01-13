@@ -17,10 +17,4 @@ class Item
   has n, :itemAttributes
   belongs_to :category, :required => false
   
-  def add_attribute(key, value)
-    if !@itemAttributes.nil? and @itemAtributes.get(:akey => key).nil?
-      @itemAttributes.create(:akey => key, :avalue => value)
-    end
-  end
-  
 end

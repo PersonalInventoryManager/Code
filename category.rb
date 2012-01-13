@@ -11,10 +11,4 @@ class Category
   has n, :categoryAttributes
   has n, :items
   
-  def add_attribute(key)
-    if !@categoryAttributes.nil? and @categoryAttributes.get(:akey => key).nil?
-      @categoryAttributes.create(:akey => key)
-    end
-  end
-  
 end
