@@ -1,16 +1,14 @@
-include 'rubygems'
-include 'data_mapper'
+require 'rubygems'
+require 'data_mapper'
 
 class ItemAttribute
   include DataMapper::Resource
   
   property :id,      Serial
-  property :key,     String
-  property :value,   String
+  property :akey,     String
+  property :avalue,   String
   
   belongs_to :item
-  
-  def initialize(key, value)
     
   
 end
@@ -19,7 +17,7 @@ class CategoryAttribute
   include DataMapper::Resource
   
   property :id,  Serial
-  property :key, String
+  property :akey, String
   
   belongs_to :category
   

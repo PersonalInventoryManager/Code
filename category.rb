@@ -1,17 +1,20 @@
-include 'rubygems'
-include 'data_mapper'
-include 'attribute.rb'
+require 'rubygems'
+require 'data_mapper'
+require 'attribute.rb'
 
 class Category
   include DataMapper::Resource
   
   property :id,   Serial
-  property :name, String
+  property :cname, String
   
-  has n, :categoryattributes
+  has n, :categoryAttributes
+  belongs_to :item
   
   def add_attribute(key)
-    @categoryattributes << CategoryAttribute.create(key)
+    if !@categoryAttributes.nil? and @categoryAttributes.get(:akey => key).nil?
+      @categoryAttributes.create(:akey => key)
+    end
   end
   
 end

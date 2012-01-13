@@ -1,24 +1,26 @@
-include 'rubygems'
-include 'data_mapper'
-include 'attribute.rb'
-include 'category.rb'
+require 'rubygems'
+require 'data_mapper'
+require 'attribute.rb'
+require 'category.rb'
 
 class Item
   include DataMapper::Resource
   
   property :id,             Serial
-  property :upc,            int
-  property :name,           String
+  property :upc,            Integer
+  property :iname,          String
   property :location,       String
   property :notes,          String
   property :date_added,     DateTime
   property :date_modified,  DateTime
   
-  has n, :itemattributes
+  has n, :itemAttributes
   has 1, :category
   
   def add_attribute(key, value)
-    @itemattributes << ItemAttribute.create(key, value)
+    if !@itemAttributes.nil? and @itemAtributes.get(:akey => key).nil?
+      @itemAttributes.create(:akey => key, :avalue => value)
+    end
   end
   
 end
