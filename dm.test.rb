@@ -11,6 +11,10 @@ require 'attribute'
 require 'category'
 require 'item'
 
+DataMapper.finalize
+
+DataMapper.auto_upgrade!
+
 cat = Category.first_or_create(:cname => "RAM")
 cat.categoryAttributes.create(:akey => "size")
 
