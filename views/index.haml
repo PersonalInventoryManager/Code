@@ -1,0 +1,96 @@
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+      %title Personal Inventory Manager
+      %script{:src => "jquery-1.6.2.js", :type => "text/javascript"}
+      %script{:src => "jquery-ui-1.8.16.custom.min.js", :type => "text/javascript"}
+      %link{:href => "jquery-ui-1.8.16.custom.css", :rel => "stylesheet", :type => "text/css"}/
+      %script{:src => "autocomplete.js", :type => "text/javascript"}
+      %script{:src => "validate.js", :type => "text/javascript"}
+      :javascript
+        var validator;
+        $(function()
+        {
+           setupAutocomplete("category", ["External Hard Drive", "Internal Hard Drive", "RAM", "Uncategorized"]);
+           validator = new ValidationManager();
+           validator.interpretForm(document.getElementById("mainform"));
+           addField();
+        });
+        var fldind = 0;
+        
+        var fncfail = function(params)
+        {
+            alert("You are missing the required "+params.Item.id+" field.  Please fill it in before submitting.");
+        }
+        
+        var bdata = Array();
+        
+        function addField()
+        {
+            var cnt = document.getElementById("cont");
+            if(!cnt || typeof cnt == "undefined")
+                return;
+            var tmpin = document.createElement("input");
+            cnt.appendChild(tmpin);
+            tmpin.type = "text";
+            tmpin.id = "fld"+fldind;
+            tmpin.style.fontSize = "20px";
+            bdata[tmpin.id+""] = false;
+            tmpin.onblur = function()
+            {
+                if(this.value != "" && !bdata[this.id+""])
+                    addField();
+                bdata[this.id+""] = true;
+            }
+            var tmpsp = document.createElement("span");
+            cnt.appendChild(tmpsp);
+            tmpsp.innerHTML = "  :  ";
+            tmpsp.style.fontSize = "20px;"
+            tmpin = document.createElement("input");
+            cnt.appendChild(tmpin);
+            tmpin.type = "text";
+            tmpin.style.fontSize = "20px;";
+            cnt.appendChild(document.createElement("br"));
+            cnt.appendChild(document.createElement("br"));
+            setupAutocomplete("fld"+fldind, keylist);
+            fldind++;
+        }
+        var keylist = ["Size", "Speed"];
+          %body{:style => "padding-left:225px;padding-top:125px;font-size:20px;"}
+    %div{:style => "position:absolute;left:0px;top:0px;width:100%;height:100px;padding:0;overflow:hidden;text-align:center;"}
+      %div{:style => "position:absolute;left:0;top:0;width:100%;height:100px;overflow:hidden;padding-left:100px;text-align:center;font-size:75px;"} Add Item
+    %form#mainform{:action => "add", :method => "post", :onsubmit => "return validator.failFastValidate(fncfail, null);"}
+      %input{:name => "state", :type => "hidden", :value => "added"}/
+      Name
+      %span{:style => "color:#FF0000;"}> *
+      \:
+      %input{:isrequired => "Name", :name => "nme", :style => "font-size:20px;", :type => "text"}/
+      %br/
+      %br/
+      UPC
+      %span{:style => "color:#FF0000;"}> *
+      \:
+      %input{:isrequired => "UPC", :name => "upc", :style => "font-size:20px;", :type => "text"}/
+      %br/
+      %br/
+      Location:
+      %input{:style => "font-size:20px;", :type => "text"}/
+      %br/
+      %br/
+      Category:
+      %input#category{:style => "font-size:20px;", :type => "text"}/
+      %br/
+      %br/
+      #cont
+      Notes:
+      %br/
+      %br/
+      %textarea{:cols => "50", :rows => "5", :style => "font-size:20px;"}
+      %br/
+      %br/
+      %input{:style => "font-size:20px;", :type => "submit", :value => "Add"}/
+      %br/
+      %br/
+      %br/
+      %span{:style => "color:#FF0000;"} *
+      Required field
