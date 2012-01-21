@@ -5,7 +5,7 @@ require 'category.rb'
 
 class Item
   include DataMapper::Resource
-  
+  #blah
   property :id,             Serial
   property :upc,            Integer
   property :iname,          String
