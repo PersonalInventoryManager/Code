@@ -4,7 +4,7 @@ require 'data_mapper'
 # This is to avoid path issues for requiring local files
 $LOAD_PATH << File.dirname(__FILE__)
 
-require 'debug'
+require 'pim_debug'
 
 =begin
   To use the DataManager class, place the following code at the top of your file
