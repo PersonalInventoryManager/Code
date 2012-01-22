@@ -40,6 +40,30 @@ describe Item, "#upc" do
     itm.save
     itm.upc.should eq(50)
   end
+  it "doesn't allow nil upc" do
+    itm.upc = nil
+    temp = itm.save
+    if temp == false
+      itm.errors.each {|e|
+        puts e
+      }
+    end
+    itm.temp.should be(false)
+  end
+  it "doesn't allow duplicate upc" do
+    itm2 = Item.create(:upc => 25, :iname => "RAM 8", :location =>\
+        "box 4 in the basement", :date_added => dt,\
+        :date_modified => dt)
+    itm.upc = 25
+    itm.save
+    temp = itm2.save
+    if temp == false
+      itm.errors.each {|e|
+        puts e
+      }
+    end
+    itm.temp.should be(false)
+  end
 end
 
 describe Item, "#iname" do
@@ -50,6 +74,26 @@ describe Item, "#iname" do
     itm.iname = 'RAM 16'
     itm.save
     itm.iname.should eq('RAM 16')
+  end
+  it "doesn't allow nil iname" do
+    itm.iname = nil
+    temp = itm.save
+    if temp == false
+      itm.errors.each {|e|
+        puts e
+      }
+    end
+    itm.temp.should be(false)
+  end
+  it "doesn't allow blank iname" do
+    itm.iname = ""
+    temp = itm.save
+    if temp == false
+      itm.errors.each {|e|
+        puts e
+      }
+    end
+    itm.temp.should be(false)
   end
 end
 
@@ -69,7 +113,7 @@ describe Item, "#notes" do
     itm.notes.should eq(nil)
   end
   it "returns 'foo' for updated upc" do
-    itm.notes = 'foo'
+    itm.notes == 'foo'
     itm.save
     itm.notes.should eq('foo')
   end
@@ -78,6 +122,16 @@ end
 describe Item, "#date_added" do
   it "returns noon at the new year (2012) for the default date added" do
     itm.date_added.should eq(dt)
+  end
+  it "doesn't allow nil date_added" do
+    itm.date_added = nil
+    temp = itm.save
+    if temp == false
+      itm.errors.each {|e|
+        puts e
+      }
+    end
+    itm.temp.should be(false)
   end
 end
 
@@ -89,5 +143,16 @@ describe Item, "#date_modified" do
     itm.date_modified = dt2
     itm.save
     itm.date_modified.should eq(dt2)
+  end
+  it "doesn't allow nil date_modified" do
+    itm.date_added = dt
+    itm.date_modified = nil
+    temp = itm.save
+    if temp == false
+      itm.errors.each {|e|
+        puts e
+      }
+    end
+    itm.temp.should be(false)
   end
 end
