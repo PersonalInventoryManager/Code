@@ -8,8 +8,7 @@ class ItemAttribute
   property :akey,     String
   property :avalue,   String
   
-  belongs_to :item
-    
+  belongs_to :item, :required => false
   
 end
 
@@ -19,6 +18,6 @@ class CategoryAttribute
   property :id,  Serial
   property :akey, String
   
-  belongs_to :category
+  belongs_to :category, :required => false
   
 end

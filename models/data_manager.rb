@@ -72,4 +72,24 @@ class DataManager
     end
     return itm
   end
+  
+  def self.add_attribute_to_category(cname, akey)
+    if akey.nil? or akey == ""
+      printd(1, "Category attribute key cannot be empty!")
+      return nil;
+    end
+    cat = self.add_category(cname)
+    atr = CategoryAttribute.new(:akey => akey)
+    cat.categoryAttributes << atr
+    if not atr.save
+      atr.errors.each {|e|
+        printd(1, e)
+      }
+    end
+    if not cat.save
+      cat.errors.each {|e|
+        printd(1, e)
+      }
+    end
+  end
 end
