@@ -5,7 +5,7 @@ $LOAD_PATH << File.dirname(__FILE__)
 
 require 'data_manager'
 
-debug_level = 2
+$debug_level = 2
 DataManager.setup("sqlite::memory:")
 
 describe DataManager, "#add_category" do
