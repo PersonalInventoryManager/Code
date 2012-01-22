@@ -3,16 +3,19 @@
     0 => off
     1 => errors
     2 => errors and debug statements
+    3 => errors and verbose debug statements
 =end
 $debug_level = 0
 
 =begin
-  usage of printd:
-    printd(lvl, s)
-      lvl => minimum value of debug_level at which this message will print
-      s => the message to print
-    
-    NOTE: all messages print in red on the command line in order to stand out
+  Prints a debug message
+  NOTE: all messages print in red on the command line in order to stand out
+  
+  printd(lvl, s)
+    lvl:Integer => minimum value of debug_level at which this message will print
+                        (required, non-nil, non-negative)
+    s:String => the message to print (required) (nil or empty string would be
+                                                      pointless)
 =end
 def printd(lvl, s)
   if $debug_level < lvl
