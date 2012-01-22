@@ -4,7 +4,7 @@
     1 => errors
     2 => errors and debug statements
 =end
-debug_level = 0
+$debug_level = 0
 
 =begin
   usage of printd:
@@ -15,7 +15,7 @@ debug_level = 0
     NOTE: all messages print in red on the command line in order to stand out
 =end
 def printd(lvl, s)
-  if debug_level < lvl
+  if $debug_level < lvl
     return
   end
   puts(red(s))
