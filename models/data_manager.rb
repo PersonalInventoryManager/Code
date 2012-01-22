@@ -42,7 +42,7 @@ class DataManager
   
   def self.add_category(cname = nil)
     cn = cname
-    if cn.nil? or cn.eq("")
+    if cn.nil? or cn == ""
       printd(2, "Category name empty or nil, using 'Uncategorized'")
       cn = "Uncategorized"
     end
@@ -51,7 +51,7 @@ class DataManager
   
   def self.add_item(upc, iname, location = nil, notes = nil, date_added =\
     DateTime.now, category = nil)
-    itm = Item.get(:upc => upc)
+    itm = Item.first(:upc => upc)
     if itm and not itm.nil?
       printd(1, "Item with upc #{upc} already exists!")
       return nil

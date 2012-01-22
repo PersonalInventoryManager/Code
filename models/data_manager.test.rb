@@ -5,7 +5,7 @@ $LOAD_PATH << File.dirname(__FILE__)
 
 require 'data_manager'
 
-$debug_level = 2
+$debug_level = 0
 DataManager.setup("sqlite::memory:")
 
 describe DataManager, "#add_category" do
@@ -38,7 +38,7 @@ describe DataManager, "#add_item" do
       itm = DataManager.add_item(i, "Item #{i}")
       
       itm.upc.should eq(i)
-      item.iname.should eq("Item #{i}")
+      itm.iname.should eq("Item #{i}")
     end
   end
   
@@ -46,7 +46,7 @@ describe DataManager, "#add_item" do
     for i in (1..100)
       itm = DataManager.add_item(i, "Item #{i}")
       
-      itm.upc.nil?.should be true
+      itm.nil?.should be_true
     end
   end
 end
