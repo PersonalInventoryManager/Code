@@ -32,6 +32,13 @@ describe DataManager, "#add_category" do
   end
 end
 
+=begin
+  This seems to replace add_category
+=end
+describe DataManager, "#get_category" do
+
+end
+
 describe DataManager, "#add_item" do
   it "Returns [itm] of default upc and iname" do
     for i in (1..100)
@@ -51,14 +58,8 @@ describe DataManager, "#add_item" do
   end
 end
 
-describe DataManager, "#add_attribute" do
-end
+describe DataManager, "#get_item" do
 
-describe DataManager, "#update_category" do
-    =begin
-    update_category(old_name, new_name)
-    update_category('name0', 'name1')
-    =end
 end
 
 describe DataManager, "#update_item" do
@@ -72,9 +73,18 @@ describe DataManager, "#update_item" do
   it "Returns the item with an updated"
 end
 
-describe DataManager, "#udpate_item_attribute" do
-    =begin
-    update_item_attribute(item_upc, attriubte_key, new_attribute_value)
-    update_item(0, 'attr_1', 'new_attr')
-    =end
+describe DataManager, "#add_attribute_to_category" do
+
+end
+
+describe DataManager, "#set_item_attribute" do
+
+end
+
+describe DataManager, "#get_item_attribute" do
+
+end
+
+describe DataManager, "#remove_item_attribute" do
+
 end
