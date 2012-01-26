@@ -8,35 +8,29 @@ require 'data_manager'
 $debug_level = 0
 DataManager.setup("sqlite::memory:")
 
-describe DataManager, "#add_category" do
+=begin
+describe DataManager, "#get_category" do
   it "Returns [category]'Uncategorized' for default category" do
-    ct = DataManager.add_category()
+    ct = DataManager.get_category()
     ct.cname.should eq('Uncategorized')
   end
   
   it "Returns [category]'Category x' when defined as such" do
     for i in (1..100)
-      ct = DataManager.add_category("Category #{i}")
+      ct = DataManager.get_category("Category #{i}")
       ct.cname.should eq("Category #{i}")
     end
   end
   
   it "Returns [category]'Category x' even when already added" do
-    ct = DataManager.add_category()
+    ct = DataManager.get_category()
     ct.cname.should eq('Uncategorized')
     
     for i in (1..100)
-      ct = DataManager.add_category("Category #{i}")
+      ct = DataManager.get_category("Category #{i}")
       ct.cname.should eq("Category #{i}")
     end
   end
-end
-
-=begin
-  This seems to replace add_category
-=end
-describe DataManager, "#get_category" do
-
 end
 
 describe DataManager, "#add_item" do
@@ -59,14 +53,27 @@ describe DataManager, "#add_item" do
 end
 
 describe DataManager, "#get_item" do
-
+  it "Returns nil when upc is nil" do
+    nil_upc = DataManager.get_item(nil)
+    nil_upc.nil?.should be_true
+  end
+  
+  it "Returns items that already exist" do
+    for i in (1..100)
+      itm = DataManager.get_item(i)
+      
+      itm.upc.should eq(i)
+      itm.iname.should eq("Item #{i}")
+    end
+  end
+  
+  it "Returns nil when item is nonexistant" do
+    nil_itm = DataManager.get_item(101)
+    itm.nil?.should be_true
+  end
 end
 
 describe DataManager, "#update_item" do
-    =begin
-    update_item(upc, field, new_field_value)
-    update_item(0, :upc, 1)
-    =end
   it "Returns the item with an updated upc" do
   end
   
@@ -88,3 +95,4 @@ end
 describe DataManager, "#remove_item_attribute" do
 
 end
+=end 
