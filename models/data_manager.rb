@@ -31,13 +31,13 @@ DataManager.setup('<database name>')
   instance of DataManager.
 =end
 class DataManager
-  =begin
+=begin
     Sets up the DataMapper database
     
     DataManager.setup(db_name)
       db_name:String => The name of the database (see above) (required, non-nil,
                             non-empty)
-  =end
+=end
   def self.setup(db_name)
     if db_name.nil? or db_name == ""
       printd(1, "Database name cannot be nil or empty!")
@@ -52,14 +52,14 @@ class DataManager
     DataMapper.auto_upgrade!
   end
   
-  =begin
+=begin
     Gets a category or creates a new one if it does not already exist
     NOTE: if it does not find the category, it will create a new one and return
           that.  If cname is not specified, it will use "Uncategorized" instead.
     
     DataManager.get_category([cname])
       cname:String => The name of the category (optional, default: nil)
-  =end
+=end
   def self.get_category(cname = nil)
     cn = cname
     if cn.nil? or cn == ""
@@ -70,7 +70,7 @@ class DataManager
     return Category.first_or_create(:cname => cn)
   end
   
-  =begin
+=begin
     Adds an item to the database using the given field values
     
     DataManager.add_item(upc, iname [, location [, notes [, date_added]]])
@@ -82,7 +82,7 @@ class DataManager
                                   (optional, default: DateTime.now)
       category:String => The name of the category this item is in (optional,
                               (default: nil)
-  =end
+=end
   def self.add_item(upc, iname, location = nil, notes = nil, date_added =\
     DateTime.now, category = nil)
     if Item.count(:upc => upc) > 0
@@ -111,12 +111,12 @@ class DataManager
     return itm
   end
   
-  =begin
+=begin
     Gets the item with the specified UPC from the database
     
     DataManager.get_item(upc)
       upc:Integer => The UPC of the item (required, non-nil)  
-  =end
+=end
   def self.get_item(upc)
     if upc.nil?
       printd(1, "upc cannot be nil")
@@ -131,7 +131,7 @@ class DataManager
     return itm
   end
   
-  =begin
+=begin
     Updates the value of the specified field of the specified item
     
     DataManager.update_item(upc, field_name, new_field_value)
@@ -140,7 +140,7 @@ class DataManager
                                 (required, not-nil, non-empty, valid field)
       new_field_value => The new value of the field (required; type and
                               constraints depend on what field)
-  =end
+=end
   def self.update_item(upc, field_name, new_field_value)
     itm = self.get_item(upc)
     if itm.nil?
@@ -165,14 +165,14 @@ class DataManager
     return itm
   end
   
-  =begin
+=begin
     Adds an attribute with the specified key to the specified category
     
     DataManager.add_attribute_to_category(akey [, cname])
       akey:String => The key of the attribute (required, non-nil, non-empty)
       cname:String => The name of the category to add the item to (optional,
                           default: nil)
-  =end
+=end
   def self.add_attribute_to_category(akey, cname = nil)
     if akey.nil? or akey == ""
       printd(1, "Category attribute key cannot be nil or empty!")
@@ -185,6 +185,7 @@ class DataManager
         "Attribute '#{akey}' already exists in category '#{cat.cname}'.")
       atr = cat.categoryAttributes.first(:akey => akey)
       return atr
+    end
     atr = CategoryAttribute.new(:akey => akey)
     cat.categoryAttributes << atr
     if not atr.save
@@ -204,7 +205,7 @@ class DataManager
     return atr
   end
   
-  =begin
+=begin
     Sets the item attribute to the specified value
     NOTE: This method will also add the attribute key to the item's category
           if the category does not already have that attribute key
@@ -216,7 +217,7 @@ class DataManager
                           non-nil)
       akey:String => The key of the attrbute (required, non-nil, non-empty)
       avalue:String => The value of the attribute (optional, default:nil)
-  =end
+=end
   def self.set_item_attribute(upc, akey, avalue = nil)
     if upc.nil?
       printd(1, "upc cannot be nil")
@@ -274,7 +275,7 @@ class DataManager
     return atr
   end
   
-  =begin
+=begin
     Gets the attribute with the specified key belonging to the item with the
     specified upc
     NOTE: The missing_debug_level parameter should not be used unless you want
@@ -291,7 +292,7 @@ class DataManager
       missing_debug_level:Integer => The debug level of the missing attribute
                                           message (see note above) (optional,
                                           default: 1)
-  =end
+=end
   def self.get_item_attribute(upc, akey, missing_debug_level = 1)
     if upc.nil?
       printd(1, "upc cannot be nil")
@@ -316,7 +317,7 @@ class DataManager
     return atr
   end
   
-  =begin
+=begin
     Removes the specified attribute from the item with the specified upc
     NOTE: This is automatically called if you call set_item_attribute with an
           omitted, nil, or empty attribute value
@@ -326,7 +327,7 @@ class DataManager
                           non-nil)
       akey:String => The key of the attribute to remove (required, non-nil,
                           non-empty)
-  =end
+=end
   def self.remove_item_attribute(upc, akey)
     if upc.nil?
       printd(1, "upc cannot be nil")
