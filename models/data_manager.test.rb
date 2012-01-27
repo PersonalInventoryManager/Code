@@ -152,7 +152,7 @@ describe DataManager, "#set_item_attribute" do
     atr.nil?.should be_true
     
     atr = DataManager.set_item_attribute(1001, "test_item_attribute")
-    atr.nil?.should be_true
+    atr.should be_false
   end
   
   it "Returns nil if the item attribute is nil or empty" do
@@ -173,7 +173,6 @@ describe DataManager, "#set_item_attribute" do
 =end
   end
 end
- 
 =begin same problem as above, how do i test this?
 describe DataManager, "#get_item_attribute" do 
 end

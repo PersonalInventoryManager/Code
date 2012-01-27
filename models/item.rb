@@ -7,14 +7,14 @@ class Item
   include DataMapper::Resource
   
   property :id,             Serial
-  property :upc,            Integer
-  property :iname,          String
+  property :upc,            Integer,    :required => true,    :unique => true
+  property :iname,          String,     :required => true
   property :location,       String
   property :notes,          String
-  property :date_added,     DateTime
-  property :date_modified,  DateTime
+  property :date_added,     DateTime,   :required => true
+  property :date_modified,  DateTime,   :required => true
   
   has n, :itemAttributes
-  belongs_to :category, :required => false
+  belongs_to :category,                 :required => false
   
 end

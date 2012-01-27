@@ -5,10 +5,10 @@ class ItemAttribute
   include DataMapper::Resource
   
   property :id,      Serial
-  property :akey,     String
-  property :avalue,   String
+  property :akey,     String,   :required => true
+  property :avalue,   String,   :required => true
   
-  belongs_to :item, :required => false
+  belongs_to :item,             :required => false
   
 end
 
@@ -16,8 +16,8 @@ class CategoryAttribute
   include DataMapper::Resource
   
   property :id,  Serial
-  property :akey, String
+  property :akey, String,   :required => true
   
-  belongs_to :category, :required => false
+  belongs_to :category,     :required => false
   
 end

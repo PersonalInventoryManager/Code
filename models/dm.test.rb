@@ -48,21 +48,21 @@ describe Item, "#upc" do
         puts e
       }
     end
-    itm.temp.should be(false)
+    temp.should be_false
   end
   it "doesn't allow duplicate upc" do
     itm2 = Item.create(:upc => 25, :iname => "RAM 8", :location =>\
         "box 4 in the basement", :date_added => dt,\
         :date_modified => dt)
     itm.upc = 25
-    itm.save
-    temp = itm2.save
+    #itm.save
+    temp = itm.save
     if temp == false
       itm.errors.each {|e|
         puts e
       }
     end
-    itm.temp.should be(false)
+    temp.should be_false
   end
 end
 
@@ -83,7 +83,7 @@ describe Item, "#iname" do
         puts e
       }
     end
-    itm.temp.should be(false)
+    temp.should be_false
   end
   it "doesn't allow blank iname" do
     itm.iname = ""
@@ -93,7 +93,7 @@ describe Item, "#iname" do
         puts e
       }
     end
-    itm.temp.should be(false)
+    temp.should be_false
   end
 end
 
@@ -112,8 +112,8 @@ describe Item, "#notes" do
   it "returns nil for default notes" do
     itm.notes.should eq(nil)
   end
-  it "returns 'foo' for updated upc" do
-    itm.notes == 'foo'
+  it "returns 'foo' for updated notes" do
+    itm.notes = 'foo'
     itm.save
     itm.notes.should eq('foo')
   end
@@ -131,7 +131,7 @@ describe Item, "#date_added" do
         puts e
       }
     end
-    itm.temp.should be(false)
+    temp.should be_false
   end
 end
 
@@ -153,6 +153,6 @@ describe Item, "#date_modified" do
         puts e
       }
     end
-    itm.temp.should be(false)
+    temp.should be_false
   end
 end
