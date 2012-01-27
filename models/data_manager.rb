@@ -178,16 +178,20 @@ class DataManager
       printd(1, "Category attribute key cannot be nil or empty!")
       return nil;
     end
+    
     cat = self.get_category(cname)
     printd(3, "Creating category attribute '#{akey}' on category #{cat.cname}.")
+    
     if cat.categoryAttributes.count(:akey => akey) > 0
       printd(3,
         "Attribute '#{akey}' already exists in category '#{cat.cname}'.")
       atr = cat.categoryAttributes.first(:akey => akey)
       return atr
     end
+    
     atr = CategoryAttribute.new(:akey => akey)
     cat.categoryAttributes << atr
+    
     if not atr.save
       printd(1, "CategoryAttribute did not save!")
       atr.errors.each {|e|
@@ -195,6 +199,7 @@ class DataManager
       }
       return nil
     end
+    
     if not cat.save
       printd(1, "Category did not save!")
       cat.errors.each {|e|
@@ -202,6 +207,7 @@ class DataManager
       }
       return nil
     end
+    
     return atr
   end
   
@@ -223,20 +229,26 @@ class DataManager
       printd(1, "upc cannot be nil")
       return nil
     end
+    
     if akey.nil? or akey == ""
       printd(1, "Item attribute key cannot be nil or empty!")
       return nil
     end
+    
     if avalue.nil? or avalue == ""
       printd(3, "Item attribute value nil or empty. Deleting from database.")
       return self.remove_item_attribute(upc, akey)
     end
+    
     itm = self.get_item(upc)
+    
     if itm.nil?
       printd(1, "Could not find item!")
       return nil
     end
+    
     atr = self.get_item_attribute(upc, akey, 3)
+    
     if atr.nil?
       printd(3,
       "Item with upc #{upc} does not have a value for the attribute '#{akey}'!"\
@@ -246,6 +258,7 @@ class DataManager
       self.add_attribute_to_category(akey, cname)
       atr = ItemAttribute.new(:akey => akey, :avalue => avalue)
       itm.itemAttributes << atr
+      
       if not atr.save
         printd(1, "ItemAttribute did not save!")
         atr.errors.each {|e|
@@ -253,6 +266,7 @@ class DataManager
         }
         return nil
       end
+      
       if not itm.save
         printd(1, "Item did not save!")
         itm.errors.each {|e|
@@ -260,18 +274,23 @@ class DataManager
         }
         return nil
       end
+      
       return atr
     end
+    
     printd(3, "Setting value of attribute '#{akey}' from item with upc #{upc}."\
       "to '#{avalue}'.")
     atr.avalue = avalue
+    
     if not atr.save
       printd(1, "ItemAttribute did not save!")
       atr.errors.each {|e|
         printd(1, e)
       }
+      
       return nil
     end
+    
     return atr
   end
   
@@ -298,22 +317,28 @@ class DataManager
       printd(1, "upc cannot be nil")
       return nil
     end
+    
     if akey.nil? or akey == ""
       printd(1, "Item attribute key cannot be nil or empty!")
       return nil
     end
+    
     itm = self.get_item(upc)
+    
     if itm.nil?
       printd(1, "Could not find item!")
       return nil
     end
+    
     if itm.itemAttributes.count(:akey => akey) <= 0
       printd(missing_debug_level,
       "Item with upc #{upc} does not have a value for the attribute '#{akey}'!")
       return nil
     end
+    
     printd(3, "Retrieving attribute '#{akey}' from item with upc #{upc}.")
     atr = itm.itemAttributes.first(:akey => akey)
+    
     return atr
   end
   
