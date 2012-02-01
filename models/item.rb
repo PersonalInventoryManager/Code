@@ -1,7 +1,5 @@
 require 'rubygems'
 require 'data_mapper'
-require 'attribute.rb'
-require 'category.rb'
 
 class Item
   include DataMapper::Resource

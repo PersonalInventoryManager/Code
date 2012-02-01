@@ -3,11 +3,9 @@ require 'data_mapper'
 
 DataMapper.setup(:default, "sqlite:///#{Dir.pwd}/testdm.db")
 
-$LOAD_PATH << File.dirname(__FILE__)
-
-require 'attribute'
-require 'category'
-require 'item'
+require '../attribute'
+require '../category'
+require '../item'
 
 DataMapper.finalize
 

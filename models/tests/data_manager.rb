@@ -1,10 +1,7 @@
 require 'rubygems'
 require 'data_mapper'
 
-# This is to avoid path issues for requiring local files
-$LOAD_PATH << File.dirname(__FILE__)
-
-require 'pim_debug'
+require '../pim_debug'
 
 =begin
   To use the DataManager class, place the following code at the top of your file
@@ -45,9 +42,9 @@ class DataManager
     end
     printd(3, "Setting up database '#{db_name}'.")
     DataMapper.setup(:default, db_name)
-    require 'attribute'
-    require 'category'
-    require 'item'
+    require '../attribute'
+    require '../category'
+    require '../item'
     DataMapper.finalize
     DataMapper.auto_upgrade!
   end

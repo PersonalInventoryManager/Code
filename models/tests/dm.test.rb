@@ -4,12 +4,9 @@ require 'data_mapper'
 # DataMapper.setup needs to be called before requiring the DataMapper classes
 DataMapper.setup(:default, "sqlite::memory:")
 
-# This is to avoid path issues for requiring local files
-$LOAD_PATH << File.dirname(__FILE__)
-
-require 'attribute'
-require 'category'
-require 'item'
+require '../attribute'
+require '../category'
+require '../item'
 
 DataMapper.finalize
 

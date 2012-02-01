@@ -1,9 +1,6 @@
 require 'rubygems'
 
-# This is to avoid path issues for requiring local files
-$LOAD_PATH << File.dirname(__FILE__)
-
-require 'data_manager'
+require './data_manager'
 
 $debug_level = 0
 DataManager.setup("sqlite::memory:")
