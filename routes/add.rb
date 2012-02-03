@@ -6,7 +6,8 @@ class PersonalInventoryManager
   post '/submit/add' do
     # do params parsing
     # insert a new item
-    success = Item.create(*params)
+    
+    success = true
 
     if success
       if params[:redirect].nil?
@@ -15,7 +16,11 @@ class PersonalInventoryManager
         redirect params[:redirect]
       end
     else
-      redirect '/add'
+      if params[:redirect].nil?
+        return {:success => false}.to_json
+      else
+        redirect '/add'
+      end
     end
   end
 end

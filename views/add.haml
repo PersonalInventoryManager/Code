@@ -15,6 +15,7 @@
     .title_container
       .title_div Add Item
     %form#mainform{:action => "submit/add", :method => "post", :onsubmit => "return validator.failFastValidate(fncfail, null);"}
+      %input{:name => "redirect", :type => "hidden", :value => "/?added=true"}/
       Name
       %span.red> *
       \:

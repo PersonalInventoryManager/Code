@@ -27,6 +27,10 @@ div.title_div
     text-align:center;
     font-size:75px;
 }
+.large_font
+{
+    font-size:20px;
+}
 div.links_panel
 {
     position:fixed;
@@ -48,6 +52,14 @@ div.links_title
 {
     font-size:50px;
     text-align:center;
+}
+div.search_div
+{
+    padding-bottom:10px;
+}
+form.search_form
+{
+    display:inline;
 }
 a:link
 {

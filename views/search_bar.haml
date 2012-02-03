@@ -1,0 +1,10 @@
+.search_div
+  Search:
+  = succeed "&nbsp;&nbsp;&nbsp;&nbsp;" do
+    %form.search_form{:action => "search", :method => "post", :onsubmit => "return validateBasicSearch();"}
+      %input{:name => "state", :type => "hidden", :value => "basic"}/
+      = succeed "&nbsp;&nbsp;&nbsp;&nbsp;" do
+        %input#searchbox.large_font{:size => "50", :type => "text"}/
+      %input.large_font{:type => "submit", :value => "Search"}/
+    %a{:href => "search"} Advanced Search
+    %br/

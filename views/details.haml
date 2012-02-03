@@ -1,0 +1,52 @@
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+      %title Personal Inventory Manager
+      %script{:src => "scripts/jquery-1.6.2.js", :type => "text/javascript"}
+      %script{:src => "scripts/jquery-ui-1.8.16.custom.min.js", :type => "text/javascript"}
+      %link{:href => "styles/jquery-ui-1.8.16.custom.css", :rel => "stylesheet", :type => "text/css"}/
+      %script{:src => "scripts/autocomplete.js", :type => "text/javascript"}
+      %script{:src => "scripts/validate.js", :type => "text/javascript"}
+      %script{:src => "scripts/details.js", :type => "text/javascript"}
+      %link{:href => "styles/core.css", :rel => "stylesheet", :type => "text/css"}/
+      %link{:href => "styles/details.css", :rel => "stylesheet", :type => "text/css"}/
+  %body
+    = haml :links
+    .title_container
+      .title_div Item Details
+      .name_div
+        %span.name_span{:onclick => "changeToTextFieldTitle(this, 'nme', true);"} 2GB DDR3 RAM for Dell Inspiron 1520 laptop
+    .changed_div
+      %span#changedspan
+        Change Saved
+    #crtmod Created: 29/9/2011 3:20 pm
+    %br/
+    .large_font
+      UPC:
+      %span.text_span{:onclick => "changeToTextField(this, 'upc', true);"} 912837465555
+    %br/
+    .large_font
+      Location:
+      %span.text_span{:onclick => "changeToTextField(this, 'upc');"} Box 4 in the Basement
+    %br/
+    .large_font
+      Category:
+      %span{:style => "padding:10px;"} RAM
+    %br/
+    .large_font
+      %span.text_span{:onclick => "changeToAutocompleteTextField(this, keylist, 'k0', true);"} Size
+      \:
+      %span.text_span{:onclick => "changeToTextField(this, 'v0');"} 2GB
+    %br/
+    %br/
+    .large_font
+      %span.text_span{:onclick => "changeToAutocompleteTextField(this, keylist, 'k1', true);"} Manufacturer
+      \:
+      %span.text_span{:onclick => "changeToTextField(this, 'v1');"} Dell
+    %br/
+    %br/
+    .large_font
+      Notes:
+      %br/
+      %br/
+      %span.notes_span{:onclick => "changeToTextArea(this, 'notes');"}
