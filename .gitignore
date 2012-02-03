@@ -1,4 +1,6 @@
 *.rb~
 \#*.rb\#
+*.haml~
+\#*.haml\#
 bowling*
 database/*.sqlite

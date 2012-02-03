@@ -14,7 +14,7 @@
     = haml :links
     .title_container
       .title_div Add Item
-    %form#mainform{:action => "add", :method => "post", :onsubmit => "return validator.failFastValidate(fncfail, null);"}
+    %form#mainform{:action => "submit/add", :method => "post", :onsubmit => "return validator.failFastValidate(fncfail, null);"}
       Name
       %span.red> *
       \:
