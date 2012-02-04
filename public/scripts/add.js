@@ -24,6 +24,7 @@ function addField()
     cnt.appendChild(tmpin);
     tmpin.type = "text";
     tmpin.id = "fld"+fldind;
+    tmpin.name = "key"+fldind;
     tmpin.style.fontSize = "20px";
     bdata[tmpin.id+""] = false;
     tmpin.onblur = function()
@@ -39,6 +40,7 @@ function addField()
     tmpin = document.createElement("input");
     cnt.appendChild(tmpin);
     tmpin.type = "text";
+    tmpin.name = "val"+fldind;
     tmpin.style.fontSize = "20px";
     cnt.appendChild(document.createElement("br"));
     cnt.appendChild(document.createElement("br"));
