@@ -8,6 +8,7 @@ Dir.glob('./models/*.rb').each { |f| require f }
 
 class PersonalInventoryManager < Sinatra::Base
   configure do
+    $debug_level = 2
     set :public_folder, File.dirname(__FILE__) + "/public"
     set :prefixed_redirects, true
     
