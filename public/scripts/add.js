@@ -44,6 +44,6 @@ function addField()
     tmpin.style.fontSize = "20px";
     cnt.appendChild(document.createElement("br"));
     cnt.appendChild(document.createElement("br"));
-    setupAutocomplete("fld"+fldind, keylist);
+    //setupAutocomplete("fld"+fldind, keylist);
     fldind++;
 }
