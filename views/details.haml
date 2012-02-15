@@ -15,38 +15,33 @@
     .title_container
       .title_div Item Details
       .name_div
-        %span.name_span{:onclick => "changeToTextFieldTitle(this, 'nme', true);"} 2GB DDR3 RAM for Dell Inspiron 1520 laptop
+        %span.name_span{:onclick => "changeToTextFieldTitle(this, 'nme', true);"}=@detail_item.iname
     .changed_div
       %span#changedspan
         Change Saved
-    #crtmod Created: 29/9/2011 3:20 pm
+    #crtmod Created: #{@detail_item.date_added}
     %br/
     .large_font
       UPC:
-      %span.text_span{:onclick => "changeToTextField(this, 'upc', true);"} 912837465555
+      %span.text_span{:onclick => "changeToTextField(this, 'upc', true);"}=@detail_item.upc
     %br/
     .large_font
       Location:
-      %span.text_span{:onclick => "changeToTextField(this, 'upc');"} Box 4 in the Basement
+      %span.text_span{:onclick => "changeToTextField(this, 'upc');"}=@detail_item.location
     %br/
     .large_font
       Category:
-      %span{:style => "padding:10px;"} RAM
-    %br/
-    .large_font
-      %span.text_span{:onclick => "changeToAutocompleteTextField(this, keylist, 'k0', true);"} Size
-      \:
-      %span.text_span{:onclick => "changeToTextField(this, 'v0');"} 2GB
-    %br/
-    %br/
-    .large_font
-      %span.text_span{:onclick => "changeToAutocompleteTextField(this, keylist, 'k1', true);"} Manufacturer
-      \:
-      %span.text_span{:onclick => "changeToTextField(this, 'v1');"} Dell
-    %br/
+      %span{:style => "padding:10px;"}=@detail_item.category.cname
+    -@detail_item.itemAttributes.all.each do |attr|
+      %br/
+      .large_font
+        %span.text_span{:onclick => "changeToAutocompleteTextField(this, keylist, 'k0', true);"}=attr.akey
+        \:
+        %span.text_span{:onclick => "changeToTextField(this, 'v0');"}=attr.avalue
+      %br/
     %br/
     .large_font
       Notes:
       %br/
       %br/
-      %span.notes_span{:onclick => "changeToTextArea(this, 'notes');"}
+      %span.notes_span{:onclick => "changeToTextArea(this, 'notes');"}=@detail_item.notes

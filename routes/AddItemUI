@@ -1,0 +1,9 @@
+require 'rubygems'
+require 'sinatra'
+require 'haml'
+
+class AddItemUI < Sinatra::Base
+	get '/add_item' do
+    haml :index
+  end
+end
