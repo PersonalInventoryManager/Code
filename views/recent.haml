@@ -1,13 +1,14 @@
-%div{:style => "padding:10px;background-color:#BBBBBB;border: 5px solid #000000;"}
-  %div{:style => "font-size:35px;"}
-    %a{:href => "details", :style => "color:#0000FF;cursor:pointer;"} 2GB DDR3 RAM for Dell Inspiron 1520 laptop
-  %div{:style => "font-size:18px;"} Created: 29/9/2011 3:20 pmÊÊÊÊModified: 6/10/2011 2:45 pm
-  %div{:style => "font-size:20px;"}
-    UPC: 912837465555
-    %br/
-    Category: RAM
-    %br/
-    Size: 8GB
-    %br/
-    Manufacturer: Dell
-%br/
+-Item.all(:order => [:date_modified.desc]).first(5).each do |itm|
+  %div{:style => "padding:10px;background-color:#BBBBBB;border: 5px solid #000000;"}
+    %div{:style => "font-size:35px;"}
+      %a{:href => "details?upc=#{itm.upc}", :style => "color:#0000FF;cursor:pointer;"}=itm.iname
+    %div{:style => "font-size:18px;"} Created: #{itm.date_added} pm&nbsp;&nbsp;&nbsp;&nbsp;Modified: #{itm.date_modified}
+    %div{:style => "font-size:20px;"}
+      UPC: #{itm.upc}
+      %br/
+      Category: #{itm.category.cname}
+      -itm.itemAttributes.all.each do |attr|
+        %br/
+        #{attr.akey}: #{attr.avalue}
+
+
